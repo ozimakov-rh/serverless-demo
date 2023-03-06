@@ -23,10 +23,10 @@ jobs:
 
       - name: Build Spring Boot service
         run: |
-          cd ../springboot-pi-service
+          cd ./springboot-pi-service
           ./mvnw test
 
       - name: Build Quarkus service
         run: |
-          cd ../quarkus-pi-service
+          cd ./quarkus-pi-service
           ./mvnw test
