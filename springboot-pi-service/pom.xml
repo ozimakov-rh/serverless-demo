@@ -49,15 +49,11 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<image>
-						<name>ozimakov/springboot-pi-service</name>
+						<name>springboot-pi-service</name>
 					</image>
 					<layers>
 						<enabled>true</enabled>
 					</layers>
-					<docker>
-						<host>unix:///run/user/1000/podman/podman.sock</host>
-						<bindHostToBuilder>true</bindHostToBuilder>
-					</docker>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>

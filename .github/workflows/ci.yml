@@ -23,14 +23,14 @@ jobs:
       - name: Build pi-commons
         run: |
           cd pi-common
-          ./mvnw install
+          ./mvnw -B install
 
       - name: Build Spring Boot service
         run: |
           cd ./springboot-pi-service
-          ./mvnw test
+          ./mvnw -B test
 
       - name: Build Quarkus service
         run: |
           cd ./quarkus-pi-service
-          ./mvnw test
+          ./mvnw -B test

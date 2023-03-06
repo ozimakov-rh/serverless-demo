@@ -22,14 +22,14 @@ jobs:
       - name: Build pi-commons
         run: |
           cd pi-common
-          ./mvnw install
+          ./mvnw -B install
 
       - name: Build Spring Boot service
         run: |
           cd ./springboot-pi-service
-          ./mvnw install spring-boot:build-image
+          ./mvnw -B install spring-boot:build-image
 
       - name: Build Quarkus service
         run: |
           cd ./quarkus-pi-service
-          ./mvnw install -Dquarkus.container-image.build=true
+          ./mvnw -B install -Dquarkus.container-image.build=true
