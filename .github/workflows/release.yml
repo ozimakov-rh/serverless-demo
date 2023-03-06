@@ -1,8 +1,9 @@
 name: Release
 
 on:
-  branches:
-    - 'feature/release-workflow'
+  push:
+    branches:
+      - 'feature/release-workflow'
 
 jobs:
   build:
