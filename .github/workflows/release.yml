@@ -42,4 +42,7 @@ jobs:
       - name: Build Quarkus service
         run: |
           cd ./quarkus-pi-service
-          ./mvnw -B install -Pnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true
+          ./mvnw -B package -Pnative
+          docker build -f src/main/docker/Dockerfile.native-micro -t quarkus-pi-service:latest .
+          docker tag quarkus-pi-service:latest quay.io/rh_ee_ozimakov/quarkus-pi-service:latest
+          docker push quay.io/rh_ee_ozimakov/quarkus-pi-service:latest
