@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-pi-service
+  labels:
+    app: springboot-pi-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springboot-pi-service
+  template:
+    metadata:
+      labels:
+        app: springboot-pi-service
+    spec:
+      containers:
+        - name: springboot-pi-service
+          image: quay.io/rh_ee_ozimakov/springboot-pi-service:latest
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            initialDelaySeconds: 3
+            periodSeconds: 3

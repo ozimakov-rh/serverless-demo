@@ -31,15 +31,15 @@ jobs:
           cd pi-common
           ./mvnw -B install
 
-      - name: Build & push Spring Boot service image
-        run: |
-          cd ./springboot-pi-service
-          ./mvnw -B install spring-boot:build-image
-          docker tag springboot-pi-service:latest quay.io/rh_ee_ozimakov/springboot-pi-service:latest
-          docker push quay.io/rh_ee_ozimakov/springboot-pi-service:latest
+#      - name: Build & push Spring Boot service image
+#        run: |
+#          cd ./springboot-pi-service
+#          ./mvnw -B install spring-boot:build-image
+#          docker tag springboot-pi-service:latest quay.io/rh_ee_ozimakov/springboot-pi-service:latest
+#          docker push quay.io/rh_ee_ozimakov/springboot-pi-service:latest
           
 
-      - name: Build Quarkus service
+      - name: Build & push Quarkus service image
         run: |
           cd ./quarkus-pi-service
           ./mvnw -B install -Pnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true
