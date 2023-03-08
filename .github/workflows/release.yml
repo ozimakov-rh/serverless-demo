@@ -43,5 +43,5 @@ jobs:
         run: |
           cd ./quarkus-pi-service
           ./mvnw -B package -Pnative
-          docker build -f src/main/docker/Dockerfile.native -t quay.io/rh_ee_ozimakov/quarkus-pi-service:latest
+          docker build -f src/main/docker/Dockerfile.native -t quay.io/rh_ee_ozimakov/quarkus-pi-service:latest .
           docker push quay.io/rh_ee_ozimakov/quarkus-pi-service:latest
