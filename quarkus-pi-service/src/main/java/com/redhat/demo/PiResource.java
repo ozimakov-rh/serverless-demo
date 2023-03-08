@@ -1,5 +1,9 @@
 package com.redhat.demo;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -26,6 +30,12 @@ public class PiResource {
         return new PiResponse(complexity, pi, Duration.between(start, end).toMillis());
     }
 
-    public record PiResponse(double complexity, double pi, long duration) {
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    public static class PiResponse {
+        private double complexity;
+        private double pi;
+        private long duration;
     }
 }
