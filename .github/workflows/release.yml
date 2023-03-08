@@ -26,12 +26,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build pi-commons
-        run: |
-          cd pi-common
-          ./mvnw -B install
-
-#      - name: Build & push Spring Boot service image
+#      - name: Build & Push Spring Boot service image
 #        run: |
 #          cd ./springboot-pi-service
 #          ./mvnw -B install spring-boot:build-image
@@ -39,9 +34,9 @@ jobs:
 #          docker push quay.io/rh_ee_ozimakov/springboot-pi-service:latest
           
 
-      - name: Build & push Quarkus service image
+      - name: Build & Push Quarkus service image
         run: |
           cd ./quarkus-pi-service
-          ./mvnw -B package -Pnative
-          docker build -f src/main/docker/Dockerfile.native -t quay.io/rh_ee_ozimakov/quarkus-pi-service:latest .
+          ./mvnw -B package -Pnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true
+          docker tag quarkus-pi-service:latest quay.io/rh_ee_ozimakov/quarkus-pi-service:latest
           docker push quay.io/rh_ee_ozimakov/quarkus-pi-service:latest

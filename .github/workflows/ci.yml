@@ -20,11 +20,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           cache: 'maven'
 
-      - name: Build pi-commons
-        run: |
-          cd pi-common
-          ./mvnw -B install
-
       - name: Build Spring Boot service
         run: |
           cd ./springboot-pi-service

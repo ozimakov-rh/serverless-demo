@@ -16,7 +16,6 @@
         <quarkus.platform.version>2.16.4.Final</quarkus.platform.version>
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
-        <dependency-plugin.version>3.5.0</dependency-plugin.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -30,11 +29,6 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
-        <dependency>
-            <groupId>com.redhat.demo</groupId>
-            <artifactId>pi-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-resteasy-reactive-jsonb</artifactId>
