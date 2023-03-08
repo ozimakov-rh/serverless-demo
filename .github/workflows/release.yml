@@ -27,7 +27,7 @@ jobs:
       - name: Build & Push Quarkus image
         run: |
           cd ./quarkus-pi-service
-          ./mvnw -B package -Dnative -Dquarkus.container-image.build=true -Dquarkus.native.builder-image=quay.io/quarkus/ubi-quarkus-mandrel-builder-image:22.3-java17
+          ./mvnw -B package -Pnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true
           docker tag runner/quarkus-pi-service:latest quay.io/rh_ee_ozimakov/quarkus-pi-service:latest
           docker push quay.io/rh_ee_ozimakov/quarkus-pi-service:latest
 
