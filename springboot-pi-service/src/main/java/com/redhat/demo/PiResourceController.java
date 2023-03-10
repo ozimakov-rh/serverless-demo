@@ -1,11 +1,10 @@
 package com.redhat.demo;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.Duration;
 import java.time.LocalTime;
@@ -26,13 +25,7 @@ public class PiResourceController {
         return new PiResponse(complexity, pi, Duration.between(start, end).toMillis());
     }
 
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Getter
-    public static class PiResponse {
-        private double complexity;
-        private double pi;
-        private long duration;
+    public record PiResponse (double complexity, double pi, long duration) {
     }
 
 }

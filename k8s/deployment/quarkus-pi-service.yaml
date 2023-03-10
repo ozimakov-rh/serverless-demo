@@ -4,6 +4,8 @@ metadata:
   name: quarkus-pi-service
   labels:
     app: quarkus-pi-service
+    app.openshift.io/runtime: quarkus
+    app.kubernetes.io/part-of: pi-service
 spec:
   replicas: 1
   selector:
@@ -22,9 +24,9 @@ spec:
           resources:
             requests:
               memory: "64Mi"
-              cpu: "250m"
+              cpu: "100m"
             limits:
-              memory: "512Mi"
+              memory: "256Gi"
               cpu: "500m"
           livenessProbe:
             httpGet:
@@ -50,3 +52,37 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 8080
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: quarkus-pi-service-hpa
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: quarkus-pi-service
+    apiVersion: apps/v1
+  minReplicas: 1
+  maxReplicas: 30
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 50
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: quarkus-pi-service
+spec:
+  to:
+    kind: Service
+    name: quarkus-pi-service
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None

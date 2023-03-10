@@ -4,6 +4,8 @@ metadata:
   name: springboot-pi-service
   labels:
     app: springboot-pi-service
+    app.openshift.io/runtime: spring-boot
+    app.kubernetes.io/part-of: pi-service
 spec:
   replicas: 1
   selector:
@@ -50,3 +52,37 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 8080
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: springboot-pi-service-hpa
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: springboot-pi-service
+    apiVersion: apps/v1
+  minReplicas: 3
+  maxReplicas: 30
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 50
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: springboot-pi-service
+spec:
+  to:
+    kind: Service
+    name: springboot-pi-service
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
