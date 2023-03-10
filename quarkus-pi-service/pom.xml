@@ -30,11 +30,6 @@
     </dependencyManagement>
     <dependencies>
         <dependency>
-            <groupId>com.redhat.demo</groupId>
-            <artifactId>pi-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-resteasy-reactive-jsonb</artifactId>
         </dependency>
@@ -52,7 +47,7 @@
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-container-image-buildpack</artifactId>
+            <artifactId>quarkus-container-image-jib</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
