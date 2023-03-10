@@ -27,8 +27,8 @@ jobs:
       - name: Build & Push Quarkus image
         run: |
           cd ./quarkus-pi-service
-          ./mvnw -B package -Pnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true
-          docker tag runner/quarkus-pi-service:latest quay.io/rh_ee_ozimakov/quarkus-pi-service:latest
+          ./mvnw -B package -Pnative -Dquarkus.native.container-build=true
+          docker build -f src/main/docker/Dockerfile.native-micro -t quay.io/rh_ee_ozimakov/quarkus-pi-service:latest
           docker push quay.io/rh_ee_ozimakov/quarkus-pi-service:latest
 
   build-springboot:
