@@ -24,7 +24,7 @@ spec:
           resources:
             requests:
               memory: "64Mi"
-              cpu: "100m"
+              cpu: "250m"
             limits:
               memory: "256Gi"
               cpu: "500m"
@@ -62,7 +62,7 @@ spec:
     kind: Deployment
     name: quarkus-pi-service
     apiVersion: apps/v1
-  minReplicas: 1
+  minReplicas: 3
   maxReplicas: 30
   metrics:
     - type: Resource
