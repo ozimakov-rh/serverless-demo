@@ -35,6 +35,7 @@ jobs:
           ./mvnw -B package -Pnative -Dquarkus.native.container-build=true
           docker build -f src/main/docker/Dockerfile.native-micro -t quay.io/rh_ee_ozimakov/quarkus-pi-service:$VERSION .
           docker tag quay.io/rh_ee_ozimakov/quarkus-pi-service:$VERSION quay.io/rh_ee_ozimakov/quarkus-pi-service:latest
+          docker push quay.io/rh_ee_ozimakov/quarkus-pi-service:$VERSION
           docker push quay.io/rh_ee_ozimakov/quarkus-pi-service:latest
 
   build-springboot:
@@ -67,4 +68,5 @@ jobs:
           ./mvnw -B install spring-boot:build-image
           docker tag springboot-pi-service:latest quay.io/rh_ee_ozimakov/springboot-pi-service:$VERSION
           docker tag springboot-pi-service:latest quay.io/rh_ee_ozimakov/springboot-pi-service:latest
+          docker push quay.io/rh_ee_ozimakov/springboot-pi-service:$VERSION
           docker push quay.io/rh_ee_ozimakov/springboot-pi-service:latest
