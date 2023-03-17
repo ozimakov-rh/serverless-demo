@@ -13,6 +13,7 @@ import java.time.LocalTime;
 @RequestMapping("pi")
 public class PiResourceController {
 
+    private static final String APP_VERSION_TAG = "springboot/v1";
     @Autowired
     private PiCalculatorService piCalculatorService;
 
@@ -22,10 +23,10 @@ public class PiResourceController {
         var start = LocalTime.now();
         var pi = piCalculatorService.calculatePi(complexity);
         var end = LocalTime.now();
-        return new PiResponse(complexity, pi, Duration.between(start, end).toMillis());
+        return new PiResponse(complexity, pi, Duration.between(start, end).toMillis(), APP_VERSION_TAG);
     }
 
-    public record PiResponse (double complexity, double pi, long duration) {
+    public record PiResponse (double complexity, double pi, long duration, String version) {
     }
 
 }

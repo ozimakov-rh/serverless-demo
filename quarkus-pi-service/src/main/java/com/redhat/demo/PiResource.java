@@ -12,6 +12,7 @@ import java.time.LocalTime;
 @Path("/pi")
 public class PiResource {
 
+    private static final String APP_VERSION_TAG = "quarkus/v1";
     @Inject
     PiCalculatorService piCalculatorService;
 
@@ -23,10 +24,10 @@ public class PiResource {
         var start = LocalTime.now();
         var pi = piCalculatorService.calculatePi(complexity);
         var end = LocalTime.now();
-        return new PiResponse(complexity, pi, Duration.between(start, end).toMillis());
+        return new PiResponse(complexity, pi, Duration.between(start, end).toMillis(), APP_VERSION_TAG);
     }
 
-    public record PiResponse (double complexity, double pi, long duration) {
+    public record PiResponse (double complexity, double pi, long duration, String version) {
     }
 
 }
