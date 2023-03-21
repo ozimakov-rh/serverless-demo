@@ -1,0 +1,47 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: quarkus-pi-service
+spec:
+  template:
+    spec:
+      containerConcurrency: 0
+      containers:
+        - image: quay.io/rh_ee_ozimakov/quarkus-pi-service:1.0
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          readinessProbe:
+            successThreshold: 1
+            httpGet:
+              path: /q/health/ready
+              port: 8080
+              initialDelaySeconds: 3
+              periodSeconds: 3
+  traffic:
+    - latestRevision: true
+      percent: 100
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: springboot-pi-service
+spec:
+  template:
+    spec:
+      containerConcurrency: 0
+      containers:
+        - image: quay.io/rh_ee_ozimakov/springboot-pi-service:1.0
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          readinessProbe:
+            successThreshold: 1
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+              initialDelaySeconds: 3
+              periodSeconds: 3
+  traffic:
+    - latestRevision: true
+      percent: 100
