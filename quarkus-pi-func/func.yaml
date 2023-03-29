@@ -2,8 +2,8 @@ specVersion: 0.34.0
 name: quarkus-pi-func
 runtime: quarkus
 registry: quay.io/rh_ee_ozimakov/quarkus-pi-func
-image: ""
-imageDigest: ""
+image: quay.io/rh_ee_ozimakov/quarkus-pi-func:latest
+imageDigest: sha256:4f3f323305f3b31ad211388152834f94cc8cef232b9d9517b41893f97213c14b
 created: 2023-03-28T14:10:44.996185-07:00
 invocation:
   format: http
@@ -26,7 +26,7 @@ run:
   volumes: []
   envs: []
 deploy:
-  namespace: serverless-eventing-demo
+  namespace: serverless-demo
   annotations: {}
   options: {}
   labels: []

@@ -8,3 +8,4 @@ curl -i https://quarkus-pi-service-serverless-demo.apps.rosa-ozimakov.cns5.p1.op
 
 k6 run -e PI_ENDPOINT="https://springboot-pi-service-serverless-demo.apps.rosa-ozimakov.cns5.p1.openshiftapps.com" k6.js
 k6 run -e PI_ENDPOINT="https://quarkus-pi-service-serverless-demo.apps.rosa-ozimakov.cns5.p1.openshiftapps.com" k6.js
+

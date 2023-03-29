@@ -12,7 +12,7 @@ export const options = {
 };
 
 export default function () {
-    const res = http.get(`${__ENV.PI_ENDPOINT}/pi/6`);
+    const res = http.get(`${__ENV.PI_ENDPOINT}/pi/5`);
     check(res, {
         'is status 200': (r) => r.status === 200,
     });
