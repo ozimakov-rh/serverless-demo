@@ -23,16 +23,18 @@ kn source ping create pong-event-producer --schedule '* * * * *' --data '{ value
 kn channel delete my-channel
 
 # BROKERS & TRIGGERS
-oc apply -f k8s/kafka/kafka.yaml
+oc apply -f demo-scripts/kafka/kafka.yaml
 oc describe kafka kafka-serverless
 #  check bootstrap url
-oc apply -f k8s/kafka/kafkabroker.yaml
+oc apply -f demo-scripts/kafka/kafkabroker.yaml
 kn broker list
 # show the topic
 oc get kafkatopic
 
-kn source ping update ping-event-producer --sink broker:kafka-broker --ce-override messagetype=ping
-kn source ping update pong-event-producer --sink broker:kafka-broker --ce-override messagetype=pong
+kn source ping create ping-event-producer --schedule '* * * * *' --data '{ value: Ping }' --sink broker:kafka-broker --ce-override messagetype=ping
+#kn source ping update ping-event-producer --sink broker:kafka-broker --ce-override messagetype=ping
+kn source ping create pong-event-producer --schedule '* * * * *' --data '{ value: Pong }' --sink broker:kafka-broker --ce-override messagetype=pong
+#kn source ping update pong-event-producer --sink broker:kafka-broker --ce-override messagetype=pong
 
 # check the topic
 oc run kafka-consumer -ti \
@@ -44,10 +46,12 @@ oc run kafka-consumer -ti \
 --topic knative-broker-serverless-eventing-demo-kafka-broker \
 --from-beginning --property print.headers=true
 
+kn service create ping-event-consumer --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display --scale-window=10s
+kn service create pong-event-consumer --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display --scale-window=10s
+kn service create all-event-consumer --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display --scale-window=2m
+
 kn trigger create ping-trigger --broker kafka-broker --filter messagetype=ping --sink ksvc:ping-event-consumer
 kn trigger create pong-trigger --broker kafka-broker --filter messagetype=pong --sink ksvc:pong-event-consumer
-
-kn service create all-event-consumer --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display --scale-window=2m
 kn trigger create all-trigger --broker kafka-broker --sink ksvc:all-event-consumer
 
 # CLEANUP
