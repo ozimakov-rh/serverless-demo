@@ -56,3 +56,18 @@ kn trigger create all-trigger --broker kafka-broker --sink ksvc:all-event-consum
 
 # CLEANUP
 oc delete project serverless-eventing-demo
+
+# -----------------
+kn service create ping-event-consumer --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display --scale-window=10s
+kn service create pong-event-consumer --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display --scale-window=10s
+kn service create all-event-consumer --image gcr.io/knative-releases/knative.dev/eventing-contrib/cmd/event_display --scale-window=2m
+
+kn source ping create ping-event-producer --schedule '* * * * *' --data '{ value: Ping }' --sink ksvc:ping-event-consumer --ce-override messagetype=ping
+kn source ping delete ping-event-producer
+
+kn source ping create ping-event-producer --schedule '* * * * *' --data '{ value: Ping }' --sink broker:kafka-broker --ce-override messagetype=ping
+kn source ping create pong-event-producer --schedule '* * * * *' --data '{ value: Pong }' --sink broker:kafka-broker --ce-override messagetype=pong
+
+kn trigger create ping-trigger --broker kafka-broker --filter messagetype=ping --sink ksvc:ping-event-consumer
+kn trigger create pong-trigger --broker kafka-broker --filter messagetype=pong --sink ksvc:pong-event-consumer
+kn trigger create all-trigger --broker kafka-broker --sink ksvc:all-event-consumer

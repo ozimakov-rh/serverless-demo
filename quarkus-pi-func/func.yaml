@@ -26,7 +26,7 @@ run:
   volumes: []
   envs: []
 deploy:
-  namespace: serverless-demo
+  namespace: serving-demo
   annotations: {}
   options: {}
   labels: []

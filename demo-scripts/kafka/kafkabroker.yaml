@@ -3,9 +3,9 @@ kind: ConfigMap
 metadata:
   name: kafka-broker-config
 data:
-  default.topic.partitions: "3"
+  default.topic.partitions: "10"
   default.topic.replication.factor: "3" 
-  bootstrap.servers: "kafka-serverless-kafka-bootstrap.serverless-eventing-demo.svc:9092" 
+  bootstrap.servers: "kafka-serverless-kafka-bootstrap.eventing-demo.svc:9092"
 ---
 apiVersion: eventing.knative.dev/v1
 kind: Broker
