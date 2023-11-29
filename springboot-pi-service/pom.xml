@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.redhat.demo</groupId>
-    <artifactId>springboot-demo-service</artifactId>
+    <artifactId>springboot-pi-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>springboot-demo-service</name>
+    <name>springboot-pi-service</name>
     <description>Spring Boot PI Service</description>
     <properties>
         <java.version>17</java.version>
