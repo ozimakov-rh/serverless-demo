@@ -13,7 +13,7 @@ import java.time.LocalTime;
 @RequestMapping("pi")
 public class PiResourceController {
 
-    private static final String APP_VERSION_TAG = "springboot/v1";
+    private static final String APP_VERSION_TAG = "springboot/v2";
 
     @Autowired
     private PiCalculatorService piCalculatorService;
