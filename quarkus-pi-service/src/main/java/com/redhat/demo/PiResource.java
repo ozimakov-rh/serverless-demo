@@ -12,7 +12,7 @@ import java.time.LocalTime;
 @Path("/pi")
 public class PiResource {
 
-    private static final String APP_VERSION_TAG = "quarkus/v2";
+    private static final String APP_VERSION_TAG = "quarkus/v1";
     @Inject
     PiCalculatorService piCalculatorService;
 
