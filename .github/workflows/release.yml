@@ -65,8 +65,8 @@ jobs:
       - name: Build & Push Spring Boot image
         run: |
           cd ./springboot-pi-service
-          ./mvnw -B install spring-boot:build-image
-          docker tag springboot-pi-service:latest quay.io/rh_ee_ozimakov/springboot-pi-service:$VERSION
-          docker tag springboot-pi-service:latest quay.io/rh_ee_ozimakov/springboot-pi-service:latest
+          ./mvnw -B package -Pnative spring-boot:build-image
+          docker tag springboot-pi-service:springboot-pi-service:0.0.1-SNAPSHOT quay.io/rh_ee_ozimakov/springboot-pi-service:$VERSION
+          docker tag springboot-pi-service:springboot-pi-service:0.0.1-SNAPSHOT quay.io/rh_ee_ozimakov/springboot-pi-service:latest
           docker push quay.io/rh_ee_ozimakov/springboot-pi-service:$VERSION
           docker push quay.io/rh_ee_ozimakov/springboot-pi-service:latest
