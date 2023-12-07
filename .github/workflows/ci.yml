@@ -49,7 +49,7 @@ jobs:
           java-version: '17'
           cache: 'maven'
 
-      - name: Build Spring Boot service
+      - name: Build Quarkus Function
         run: |
           cd ./quarkus-pi-func
           ./mvnw -B test
